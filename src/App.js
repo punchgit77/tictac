@@ -1,38 +1,52 @@
 import React,{ useState } from "react";
-import Board from './components/Board'
+import Board from './components/Board';
+import History from "./components/History";
 import { calculatewinner } from "./helpers";
 import "./styles/root.scss"
 const App = () => {
-  const [board,setBoard]=useState(Array(9).fill(null));
-  const [isXnext,setIsXnext]=useState(false);
-  const winner = calculatewinner(board);
-  const message = winner? `winner is ${winner} `:`Next Player is ${isXnext?'X':'0'}`;
-  const handleSquareClick = (position) => {
+  const [history,setHistory]=useState([
+    { board: Array(9).fill(null), isXnext : true },
+  ]);
+  const [currentMove,setcurrentmove]=useState(0);
+  const current=history[currentMove];
+  const winner = calculatewinner(current.board);
+  const message = winner? 
+                  `Winner is ${winner}`:
+                  `Next Player is ${current.isXnext? 'X' : '0'}`;
+  const handleSquareClick = position => {
 
-      if(board[position] || winner ){
+      if(current.board[position] || winner ){
           return;
       }
-              setBoard ((prev) => {
-                 return  prev.map((square,pos)=>{
-                  if(pos===position){
-                      return  isXnext?'X':'0';
+              setHistory (prev => {
+
+                 const last = prev[prev.length - 1];
+                 const newBoard = last.board.map((square,pos) => {
+                  if (pos === position) {
+                      return  last.isXnext ? 'X' : '0';
                   }
                   return square;
                  
-                  })
-                    
-              })
-               setIsXnext(prev=>!prev);
-  };
+                  });
 
+                 return prev.concat({ board: newBoard, isXnext: !last.isXnext });   
+              });
+
+               setcurrentmove(prev => prev+1);
+  };
+            
+   const moveTo = move => {
+     setcurrentmove(move);
+   };
   
   return (
   <div className="app">
     <h1>TIC TAC TOE</h1>
     <h2>{message}</h2>
-    <Board board={board} handleSquareClick={handleSquareClick}/>
+    <Board board={current.board} handleSquareClick={handleSquareClick}/>
+    <History history={history} moveTo={moveTo} currentMove={currentMove} />
   </div>
    );
 }
 
-  export default App
+  export default App;
