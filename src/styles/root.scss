@@ -1,4 +1,10 @@
+$green: #12e177;
+$orange: #ffc72a;
+$blue: #4c43d4;
 body {
+  font-family: 'Roboto', sans-serif;
+  background: url(../styles/img/space.jpg);
+  color: #fff;
   padding: 0;
   margin: 0;
 }
@@ -12,26 +18,100 @@ button {
   }
 }
 
+
+
 .app {
   font-size: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  h1{
+    justify-content: right;
+  }
+}
+
+.text-green {
+  color: $green;
+}
+
+.text-orange {
+  color: $orange;
+}
+
+.history-wrapper {
+  
+  width: 100%;
+  text-align: right;
+  margin-right: 20px;
+  padding-bottom: 2px;
+  position:fixed;
+  .history {
+    display: inline-block;
+    // padding-top:350px ;
+    margin: 0;
+    li {
+      list-style: none;
+      text-align: left;
+      &:before {
+        content: '';
+        border-radius: 50%;
+        display: inline-block;
+        height: 10px;
+        width: 1px;
+        background-color: green;
+        margin-right: 4px;
+        margin-bottom: 1px;
+      }
+      .btn-move {
+        color: white;
+        &.active {
+          font-weight: bold;
+          font-size:15px;
+          color: red;
+        }
+      }
+    }
+  }
+}
+
+.status-message {
+  margin-bottom: 30px;
+  font-style: 1.2rem;
+  font-size: 40px;
+  font-weight: lighter;
+  span {
+    font-weight: normal;
+  }
+}
+
+.btn-reset {
+  
+  font-size: 0.8rem;
+  color: #fff;
+  border-radius: 15px;
+  padding: 12px 18px;
+  margin-top: 25px;
+  transition: all 0.2s;
+  background-color: $blue;
+  box-shadow: 0px 0px 0px 1px $orange;
+  &.active {
+    background-color: $orange;
+    box-shadow: none;
+  }
 }
 
 .board {
   .board-row {
     display: flex;
     flex-direction: row;
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #fff;
     &:last-child {
       border-bottom: none;
     }
-
     .square {
       width: 80px;
       height: 80px;
-      border-right: 2px solid #000;
+      border-right: 2px solid #fff;
       font-size: 2.5rem;
       padding: 0;
       overflow: hidden;
@@ -39,6 +119,140 @@ button {
       &:last-child {
         border-right: none;
       }
+      &:winning {
+        animation: scaleText 1.4s infinite;
+        @keyframes scaleText {
+          0% {
+            transform: scale(2.5rem);
+          }
+          50% {
+            font-size: scale(3.5rem);
+          }
+          100% {
+            font-size: scale(5.5rem);
+          }
+        }
+      }
     }
   }
 }
+
+// .bg-balls {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   min-width: 100%;
+//   z-index: -1;
+
+//   &:before,
+//   &:after {
+//     content: '';
+//     position: absolute;
+//     width: 750px;
+//     height: 750px;
+//     border-radius: 50%;
+//   }
+//   &:before {
+//     background-color: $orange;
+//     left: -75px;
+//     bottom: -75px;
+//     @media screen and(min-width:476px) {
+//       width: 500px;
+//       height: 300px;
+//       right: -90px;
+//       bottom: -110px;
+//     }
+//   }
+// }
+
+// .bg-balls1 {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   min-width: 100%;
+//   z-index: -1;
+
+//   &:before,
+//   &:after {
+//     content: '';
+//     position: absolute;
+//     width: 250px;
+//     height: 150px;
+//     border-radius: 50%;
+//   }
+//   &:before {
+//     background-color: $orange;
+//     left: -75px;
+//     top: -75px;
+//     @media screen and(min-width:476px) {
+//       width: 500px;
+//       height: 220px;
+//       right: -110px;
+//       bottom: -110px;
+//     }
+//   }
+// }
+
+.bg-balls2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  z-index: -1;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  &:before {
+    background-color: $orange;
+    right: -115px;
+    top: -45px;
+    @media screen and(min-width:476px) {
+      width: 500px;
+      height: 500px;
+      right: -110px;
+      bottom: -110px;
+    }
+  }
+}
+
+// .bg-balls3 {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   min-width: 100%;
+//   z-index: -1;
+
+//   &:before,
+//   &:after {
+//     content: '';
+//     position: absolute;
+//     width: 300px;
+//     height: 3000px;
+//     border-radius: 50%;
+//   }
+//   &:before {
+//     background-color: purple;
+//     left: -75px;
+//     top: -75px;
+//     @media screen and(min-width:476px) {
+//       width: 300px;
+//       height: 300px;
+//       right: -110px;
+//       bottom: -110px;
+//     }
+//   }
+// }
